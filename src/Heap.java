@@ -1,4 +1,9 @@
-public class Heaps {
+public class Heap {
+    private int[] keys;
+    private int[] id;
+    private int n; //size
+
+    //minimum key heap
     public heap_ini(keys,n){
 
     }
@@ -7,7 +12,7 @@ public class Heaps {
 
     }
 
-    min_key(){
+    public int min_key(){
 
     }
 
