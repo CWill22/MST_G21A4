@@ -2,44 +2,114 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MinHeap {
-    private int[] keys;
+    private int[] keysIn;
     private int[] id;
     private int n; //size
     private Map<Integer, Integer> pos; //position of id in heap
 
+    //constructor
+    public MinHeap(int n){
+        keysIn = new int[n];
+        id = new int[n];
+        this.n=n;
+        pos = new HashMap<>();
+    }
+
+
     //minimum key heap
-    public void heap_ini(keys,n){
-        this.keys = keys;
-        this.n = n;
-        this.id = new int[n];
-        this.pos = new HashMap<>();
+    public void heap_ini(int[] keys,int n){
+        MinHeap heap = new MinHeap(n);
         for(int i = 0; i < n; i++){
-            id[i] = i;
-            pos.put(i,i);
+            heap.keysIn[i] = keys[i];
+            heap.id[i] = i;
+            heap.pos.put(i,i);
+        }
+        heap.build_heap();
+
+        for(int i = (n/2) -1; i >= 0; i--){
+            heap.heapify(i);
         }
 
     }
 
-    in_heap(id){
-
+    public boolean in_heap(int id){
+        return pos.containsKey(id);
     }
 
     public int min_key(){
-
+        return keysIn[0];
     }
 
-    min_id(){
-
+    public int min_id(){
+        return id[0];
     }
 
-    key(id){
-
+    public int key(int id){
+        return keysIn[pos.get(id)];
     }
 
-    delete_min(){
+    public void delete_min(){
+        //if heap is empty, return
+        if(n== 0){
+            return;
+        }
+        int min = id[0];
+        id[0] = id[n-1];
+        keysIn[0] = keysIn[n-1];
+        pos.put(id[n-1],0);
+        n--;
+        heapify(0);
 
     }
-    decrease_key(){
+    public void decrease_key(int id, int key) {
+        int index = pos.get(id);
+        if(keysIn[index] < key){
+            return;
+        }
+        keysIn[index] = key;
+        //(index-1)/2 is the parent of index
+        while(index > 0 && keysIn[index] < keysIn[(index-1)/2]){
+            swap(index,(index-1)/2);
+            index = (index-1)/2;
+        }
+    }
 
+    private void build_heap(){
+        for(int i = n/2; i >= 0; i--){
+            heapify(i);
+        }
+    }
+
+    private void heapify(int i){
+        int l = 2*i+1;
+        int r = 2*i+2;
+        int smallest = i;
+        if(l < n && keysIn[l] < keysIn[smallest]){
+            smallest = l;
+        }
+        if(r < n && keysIn[r] < keysIn[smallest]){
+            smallest = r;
+        }
+        if(smallest != i){
+            swap(i,smallest);
+            heapify(smallest);
+        }
+    }
+
+    private void swap(int i, int j){
+        int temp = keysIn[i];
+        keysIn[i] = keysIn[j];
+        keysIn[j] = temp;
+        pos.put(id[i],j);
+        pos.put(id[j],i);
+        int temp2 = id[i];
+        id[i] = id[j];
+        id[j] = temp2;
+    }
+
+    public void print(){
+        for(int i = 0; i < n; i++){
+            System.out.println(keysIn[i]);
+        }
     }
 }
