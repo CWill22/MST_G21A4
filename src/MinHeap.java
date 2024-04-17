@@ -27,7 +27,7 @@ public class MinHeap {
         heap.build_heap();
 
         for(int i = (n/2); i >= 1; i--){
-            heap.heapify(i);
+            heap.reHeapify(i);
         }
 
     }
@@ -58,7 +58,7 @@ public class MinHeap {
         keysIn[1] = keysIn[n];
         pos.put(id[n],1);
         n--;
-        heapify(1);
+        reHeapify(1);
         pos.remove(min);
 
     }
@@ -77,11 +77,11 @@ public class MinHeap {
 
     private void build_heap(){
         for(int i = n/2; i >= 0; i--){
-            heapify(i);
+            reHeapify(i);
         }
     }
 
-    private void heapify(int i){
+    private void reHeapify(int i){
         int l = 2*i;
         int r = 2*i+1;
         int smallest = i;
@@ -93,7 +93,7 @@ public class MinHeap {
         }
         if(smallest != i){
             swap(i,smallest);
-            heapify(smallest);
+            reHeapify(smallest);
         }
     }
 
