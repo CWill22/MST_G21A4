@@ -9,8 +9,8 @@ public class MinHeap {
 
     //constructor
     public MinHeap(int n){
-        keysIn = new int[n];
-        id = new int[n];
+        keysIn = new int[n+1];
+        id = new int[n+1];
         this.n=n;
         pos = new HashMap<>();
     }
@@ -20,13 +20,13 @@ public class MinHeap {
     public void heap_ini(int[] keys,int n){
         MinHeap heap = new MinHeap(n);
         for(int i = 0; i < n; i++){
-            heap.keysIn[i] = keys[i];
-            heap.id[i] = i;
-            heap.pos.put(i,i);
+            heap.keysIn[i+1] = keys[i];
+            heap.id[i+1] = i+1;
+            heap.pos.put(i+1,i+1);
         }
         heap.build_heap();
 
-        for(int i = (n/2) -1; i >= 0; i--){
+        for(int i = (n/2); i >= 1; i--){
             heap.heapify(i);
         }
 
@@ -37,11 +37,11 @@ public class MinHeap {
     }
 
     public int min_key(){
-        return keysIn[0];
+        return keysIn[1];
     }
 
     public int min_id(){
-        return id[0];
+        return id[1];
     }
 
     public int key(int id){
@@ -54,23 +54,24 @@ public class MinHeap {
             return;
         }
         int min = id[0];
-        id[0] = id[n-1];
-        keysIn[0] = keysIn[n-1];
-        pos.put(id[n-1],0);
+        id[1] = id[n];
+        keysIn[1] = keysIn[n];
+        pos.put(id[n],1);
         n--;
-        heapify(0);
+        heapify(1);
+        pos.remove(min);
 
     }
     public void decrease_key(int id, int key) {
         int index = pos.get(id);
-        if(keysIn[index] < key){
+        if(keysIn[index] <= key){
             return;
         }
         keysIn[index] = key;
-        //(index-1)/2 is the parent of index
-        while(index > 0 && keysIn[index] < keysIn[(index-1)/2]){
-            swap(index,(index-1)/2);
-            index = (index-1)/2;
+        //(index)/2 is the parent of index
+        while(index > 1 && keysIn[index] < keysIn[(index)/2]){
+            swap(index,(index)/2);
+            index = (index)/2;
         }
     }
 
@@ -81,13 +82,13 @@ public class MinHeap {
     }
 
     private void heapify(int i){
-        int l = 2*i+1;
-        int r = 2*i+2;
+        int l = 2*i;
+        int r = 2*i+1;
         int smallest = i;
-        if(l < n && keysIn[l] < keysIn[smallest]){
+        if(l <= n && keysIn[l] < keysIn[smallest]){
             smallest = l;
         }
-        if(r < n && keysIn[r] < keysIn[smallest]){
+        if(r <= n && keysIn[r] < keysIn[smallest]){
             smallest = r;
         }
         if(smallest != i){
