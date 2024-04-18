@@ -39,14 +39,13 @@ public class Prim {
     public Prim(Graph graph) {
         this.graph = graph;
         int vertices = graph.vertices;
-        this.D = new double[vertices];
-        this.edgeTo = new Edge[vertices];
-        this.inMST = new boolean[vertices];
+        this.D = new double[vertices+1];
+        this.edgeTo = new Edge[vertices+1];
+        this.inMST = new boolean[vertices+1];
         this.pq = new MinHeap(vertices);
     }
 
     public List<Edge> primsMST() {
-        List<Edge> result = new ArrayList<>();
 
         // Initialize the D values and priority queue
         Arrays.fill(D, Double.POSITIVE_INFINITY);
@@ -59,7 +58,7 @@ public class Prim {
         // While the priority queue is not empty
         while (pq.getN() != 0) {  // Updated this line
             // Extract the minimum key vertex
-            int u = pq.min_id() - 1;
+            int u = pq.min_id()-1;
             pq.delete_min();
 
             // Include u to MST
@@ -69,7 +68,8 @@ public class Prim {
             for (Edge edge : graph.adjList.get(u)) {
                 int v = edge.dest;
                 double weight = edge.weight;
-
+                //print u and v
+                System.out.println("u: " + u + " v: " + v);
                 // If v is not in MST and weight of (u, v) is smaller than D value of v
                 if (!inMST[v] && weight < D[v]) {
                     // Store u in edgeTo array
@@ -87,10 +87,6 @@ public class Prim {
         }
 
         // Build the result list from the edgeTo array
-        for (int i = 1; i < graph.vertices; i++) {
-            result.add(edgeTo[i]);
-        }
-
-        return result;
+        return new ArrayList<>(Arrays.asList(edgeTo).subList(1, graph.vertices));
     }
 }

@@ -24,18 +24,19 @@ public class MinHeap {
 
     //minimum key heap
     public void heap_ini(int[] keys,int n){
-        MinHeap heap = new MinHeap(n);
+        this.keysIn = new int[n+1];
+        this.id = new int[n+1];
+        this.n = n;
+        this.pos = new ArrayList<>();
         for(int i = 0; i < n; i++){
-            heap.keysIn[i+1] = keys[i];
-            heap.id[i+1] = i+1;
-            heap.pos.add(i+1);
+            this.keysIn[i+1] = keys[i];
+            this.id[i+1] = i+1;
+            this.pos.add(i+1);
         }
-        heap.build_heap();
-
+        this.build_heap();
         for(int i = (n/2); i >= 1; i--){
-            heap.reHeapify(i);
+            this.reHeapify(i);
         }
-
     }
 
     public boolean in_heap(int id){
@@ -56,13 +57,15 @@ public class MinHeap {
 
     public void delete_min(){
         //if heap is empty, return
-        if(n== 0){
+        if(n == 0){
             return;
         }
-        int min = id[0];
+        int min = id[1];
         id[1] = id[n];
         keysIn[1] = keysIn[n];
-        pos.remove(min);
+        if (pos.contains(min)) {
+            pos.remove(Integer.valueOf(min));
+        }
         n--;
         reHeapify(1);
 
