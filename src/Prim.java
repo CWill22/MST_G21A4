@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 class Edge {
     int src, dest;
     double weight;
@@ -29,12 +28,13 @@ class Graph {
         adjList.get(src).add(edge);
     }
 }
+
 public class Prim {
     private Graph graph;
     private double[] D;
     private Edge[] edgeTo;
     private boolean[] inMST;
-    private PriorityQueue<Integer> pq;
+    private MinHeap pq;
 
     public Prim(Graph graph) {
         this.graph = graph;
@@ -42,7 +42,7 @@ public class Prim {
         this.D = new double[vertices];
         this.edgeTo = new Edge[vertices];
         this.inMST = new boolean[vertices];
-        this.pq = new PriorityQueue<>(vertices, Comparator.comparingDouble(i -> D[i]));
+        this.pq = new MinHeap(vertices);
     }
 
     public List<Edge> primsMST() {
@@ -51,12 +51,16 @@ public class Prim {
         // Initialize the D values and priority queue
         Arrays.fill(D, Double.POSITIVE_INFINITY);
         D[0] = 0;  // Make key of first vertex as 0
-        pq.offer(0);
+
+        int[] DInt = Arrays.stream(D).mapToInt(i -> (int) i).toArray();
+        pq.heap_ini(DInt, graph.vertices);
+
 
         // While the priority queue is not empty
-        while (!pq.isEmpty()) {
+        while (pq.getN() != 0) {  // Updated this line
             // Extract the minimum key vertex
-            int u = pq.poll();
+            int u = pq.min_id() - 1;
+            pq.delete_min();
 
             // Include u to MST
             inMST[u] = true;
@@ -74,8 +78,10 @@ public class Prim {
                     // Update the D value of v
                     D[v] = weight;
 
-                    // Add v to the priority queue
-                    pq.offer(v);
+                    // Decrease key of v in the priority queue
+                    if (pq.in_heap(v + 1)) {
+                        pq.decrease_key(v + 1, (int) weight);
+                    }
                 }
             }
         }
