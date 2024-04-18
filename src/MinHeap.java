@@ -7,6 +7,12 @@ public class MinHeap {
     private int n; //size
     private ArrayList<Integer> pos; //position of id in heap
 
+
+    //getter for n
+    public int getN(){
+        return n;
+    }
+
     //constructor
     public MinHeap(int n){
         keysIn = new int[n+1];
