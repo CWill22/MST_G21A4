@@ -1,18 +1,18 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MinHeap {
     private int[] keysIn;
     private int[] id;
     private int n; //size
-    private Map<Integer, Integer> pos; //position of id in heap
+    private ArrayList<Integer> pos; //position of id in heap
 
     //constructor
     public MinHeap(int n){
         keysIn = new int[n+1];
         id = new int[n+1];
         this.n=n;
-        pos = new HashMap<>();
+        pos = new ArrayList<>();
     }
 
 
@@ -22,7 +22,7 @@ public class MinHeap {
         for(int i = 0; i < n; i++){
             heap.keysIn[i+1] = keys[i];
             heap.id[i+1] = i+1;
-            heap.pos.put(i+1,i+1);
+            heap.pos.add(i+1);
         }
         heap.build_heap();
 
@@ -33,7 +33,7 @@ public class MinHeap {
     }
 
     public boolean in_heap(int id){
-        return pos.containsKey(id);
+        return pos.get(id) != null;
     }
 
     public int min_key(){
@@ -56,10 +56,10 @@ public class MinHeap {
         int min = id[0];
         id[1] = id[n];
         keysIn[1] = keysIn[n];
-        pos.put(id[n],1);
+        pos.remove(min);
         n--;
         reHeapify(1);
-        pos.remove(min);
+
 
     }
     public void decrease_key(int id, int key) {
@@ -101,8 +101,8 @@ public class MinHeap {
         int temp = keysIn[i];
         keysIn[i] = keysIn[j];
         keysIn[j] = temp;
-        pos.put(id[i],j);
-        pos.put(id[j],i);
+        pos.add(id[i],j);
+        pos.add(id[j],i);
         int temp2 = id[i];
         id[i] = id[j];
         id[j] = temp2;
