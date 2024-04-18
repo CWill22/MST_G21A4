@@ -14,6 +14,7 @@ public class Main {
         //• Each of the remaining lines contains a triple ′′i j w′′ indicating an edge between vertex i and vertex j
         //with cost w.
         //• Vertex 1 can be considered as the root.
+        //Test
 
         //note about potential error
         //the vertices in your graph.txt file start from 1, while in your Java code, array and list indices start from 0. This might cause off-by-one errors when you try to access the vertices in your adjacency list. You might need to adjust your code to account for this difference.
