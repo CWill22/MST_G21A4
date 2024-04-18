@@ -61,8 +61,10 @@ public class Main {
         System.out.println("Min key: " + minHeap.min_key());
         minHeap.delete_min();
         System.out.println("Min key after delete_min: " + minHeap.min_key());
-        minHeap.decrease_key(3, 0);
+        minHeap.decrease_key(4, 9);
         System.out.println("Min key after decrease_key: " + minHeap.min_key());
+        System.out.println("Key of 3: " + minHeap.key(3));
+        System.out.println("Min Key: " + minHeap.min_key());
 
 
 
