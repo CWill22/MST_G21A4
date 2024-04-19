@@ -24,9 +24,12 @@ class Graph {
     }
 
     public void addEdge(int src, int dest, double weight) {
-        Edge edge = new Edge(src, dest, weight);
-        adjList.get(src).add(edge);
+        Edge edge1 = new Edge(src, dest, weight);
+        Edge edge2 = new Edge(dest, src, weight); // Create a reverse edge for undirected graph
+        adjList.get(src).add(edge1);
+        adjList.get(dest).add(edge2); // Add reverse edge to the adjacency list of destination vertex
     }
+
 }
 
 public class Prim {
