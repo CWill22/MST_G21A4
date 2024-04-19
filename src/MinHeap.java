@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class MinHeap {
-    private int[] keysIn;
+    private double[] keysIn;
     private int[] id;
     private int n; //size
     private ArrayList<Integer> pos; //position of id in heap
@@ -14,7 +14,7 @@ public class MinHeap {
 
     //constructor
     public MinHeap(int n){
-        keysIn = new int[n+1];
+        keysIn = new double[n+1];
         id = new int[n+1];
         this.n=n;
         pos = new ArrayList<>();
@@ -22,8 +22,8 @@ public class MinHeap {
 
 
     //minimum key heap
-    public void heap_ini(int[] keys,int n){
-        this.keysIn = new int[n+1];
+    public void heap_ini(double[] keys, int n){
+        this.keysIn = new double[n+1];
         this.id = new int[n+1];
         this.n = n;
         this.pos = new ArrayList<>();
@@ -42,7 +42,7 @@ public class MinHeap {
         return pos.get(id) != null;
     }
 
-    public int min_key(){
+    public double min_key(){
         return keysIn[1];
     }
 
@@ -50,7 +50,7 @@ public class MinHeap {
         return id[1];
     }
 
-    public int key(int id){
+    public double key(int id){
         return keysIn[pos.get(id)];
     }
 
@@ -106,7 +106,7 @@ public class MinHeap {
     }
 
     private void swap(int i, int j){
-        int temp = keysIn[i];
+        double temp = keysIn[i];
         keysIn[i] = keysIn[j];
         keysIn[j] = temp;
         pos.add(id[i],j);

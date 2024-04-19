@@ -49,10 +49,10 @@ public class Prim {
 
         // Initialize the D values and priority queue
         Arrays.fill(D, Double.POSITIVE_INFINITY);
-        D[0] = 0;  // Make key of first vertex as 0
+        D[1] = 0;  // Make key of first vertex as 0
 
-        int[] DInt = Arrays.stream(D).mapToInt(i -> (int) i).toArray();
-        pq.heap_ini(DInt, graph.vertices);
+        //int[] DInt = Arrays.stream(D).mapToInt(i -> (int) i).toArray();
+        pq.heap_ini(D, graph.vertices);
 
 
         // While the priority queue is not empty

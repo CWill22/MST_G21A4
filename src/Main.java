@@ -71,7 +71,7 @@ public class Main {
         // Test MinHeap
         System.out.println("Testing MinHeap...");
         MinHeap minHeap = new MinHeap(5);
-        int[] keys = {5, 3, 2, 1, 4};
+        double[] keys = {5, 3, 2, 1, 4};
         minHeap.heap_ini(keys, 5);
         System.out.println("Printing heap...");
         minHeap.printHeap();
