@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MinHeap {
     private int[] keysIn;
@@ -117,7 +116,8 @@ public class MinHeap {
         id[j] = temp2;
     }
 
-    public void print(){
+    //print function
+    public void printHeap(){
         for(int i = 0; i < n; i++){
             System.out.println(keysIn[i]);
         }

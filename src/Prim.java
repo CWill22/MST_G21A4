@@ -34,7 +34,7 @@ public class Prim {
     private double[] D;
     private Edge[] edgeTo;
     private boolean[] inMST;
-    private MinHeap pq;
+    public MinHeap pq;
 
     public Prim(Graph graph) {
         this.graph = graph;
@@ -89,4 +89,8 @@ public class Prim {
         // Build the result list from the edgeTo array
         return new ArrayList<>(Arrays.asList(edgeTo).subList(1, graph.vertices));
     }
+    public void printHeap(){
+        pq.printHeap();
+    }
+
 }

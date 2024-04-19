@@ -39,6 +39,18 @@ public class Main {
             System.out.println("adding edge from " + src + " to " + dest + " with weight " + weight + " to graph...");
             graph.addEdge(src, dest, weight); //add edge to graph
         }
+        //print original graph
+        System.out.println("Printing original graph...");
+        for (int i = 0; i < n; i++) {
+            System.out.print(i + " -> ");
+            for (Edge edge : graph.adjList.get(i)) {
+                System.out.print(edge.dest + " ");
+            }
+            System.out.println();
+        }
+        //print heap using print function
+        System.out.println("Printing heap using print function...");
+        //graph.printGraph();
 
         // Create Prim object and find MST
         System.out.println("Creating Prim object...");
@@ -50,22 +62,42 @@ public class Main {
         for (Edge edge : mst) {
             if(edge != null){
                 System.out.println(edge.src + " - " + edge.dest + " : " + edge.weight);
-            }
+            } else System.out.println("Edge is null...");
 
         }
+        //print graph
+        System.out.println("Printing graph...");
+        for (int i = 0; i < n; i++) {
+            System.out.print(i + " -> ");
+            for (Edge edge : graph.adjList.get(i)) {
+                System.out.print(edge.dest + " ");
+            }
+            System.out.println();
+        }
+        //print Heap
+        System.out.println("Printing MST heap...");
+        prim.pq.printHeap();
+
+
 
         // Test MinHeap
         System.out.println("Testing MinHeap...");
         MinHeap minHeap = new MinHeap(5);
         int[] keys = {5, 3, 2, 1, 4};
         minHeap.heap_ini(keys, 5);
+        System.out.println("Printing heap...");
+        minHeap.printHeap();
+
         System.out.println("Min key: " + minHeap.min_key());
         minHeap.delete_min();
         System.out.println("Min key after delete_min: " + minHeap.min_key());
-        minHeap.decrease_key(4, 9);
+        minHeap.decrease_key(4, 0);
         System.out.println("Min key after decrease_key: " + minHeap.min_key());
         System.out.println("Key of 3: " + minHeap.key(3));
         System.out.println("Min Key: " + minHeap.min_key());
+        //print heap
+        System.out.println("Printing heap...");
+        minHeap.printHeap();
 
 
 
