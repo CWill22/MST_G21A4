@@ -25,9 +25,9 @@ class Graph {
 
     public void addEdge(int src, int dest, double weight) {
         Edge edge1 = new Edge(src, dest, weight);
-        Edge edge2 = new Edge(dest, src, weight); // Create a reverse edge for undirected graph
-        adjList.get(src).add(edge1);
-        adjList.get(dest).add(edge2); // Add reverse edge to the adjacency list of destination vertex
+        //Edge edge2 = new Edge(dest, src, weight); // Create a reverse edge for undirected graph
+        adjList.get(src+1).add(edge1);
+        //adjList.get(dest).add(edge2); // Add reverse edge to the adjacency list of destination vertex
     }
 
 }
@@ -56,12 +56,13 @@ public class Prim {
 
         //int[] DInt = Arrays.stream(D).mapToInt(i -> (int) i).toArray();
         pq.heap_ini(D, graph.vertices);
-
+        //System.out.println("Printing heap inside primsMST...");
+        //pq.printHeap();
 
         // While the priority queue is not empty
         while (pq.getN() != 0) {  // Updated this line
             // Extract the minimum key vertex
-            int u = pq.min_id()-1;
+            int u = pq.min_id();
             pq.delete_min();
 
             // Include u to MST
@@ -69,12 +70,12 @@ public class Prim {
 
             // For each adjacent vertex v of u
             for (Edge edge : graph.adjList.get(u)) {
-                int v = edge.dest;
+                int v = edge.dest + 1;
                 double weight = edge.weight;
                 //print u and v
-                System.out.println("u: " + u + " v: " + v);
-                // If v is not in MST and weight of (u, v) is smaller than D value of v
-                if (!inMST[v] && weight < D[v]) {
+                System.out.println("u: " + (u) + " v: " + (v));
+                // If weight of (u, v) is smaller than D value of v
+                if (weight < D[v]) {
                     // Store u in edgeTo array
                     edgeTo[v] = edge;
 
@@ -82,8 +83,8 @@ public class Prim {
                     D[v] = weight;
 
                     // Decrease key of v in the priority queue
-                    if (pq.in_heap(v+1 )) {
-                        pq.decrease_key(v+1 , (int) weight);
+                    if (pq.in_heap(v )) {
+                        pq.decrease_key(v , weight);
                     }
                 }
             }

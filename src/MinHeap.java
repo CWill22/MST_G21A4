@@ -39,7 +39,8 @@ public class MinHeap {
     }
 
     public boolean in_heap(int id){
-        return (pos.get(id) != null);
+        // Check if the id is within the range of the pos list.
+        return id > 0 && id < pos.size() && pos.get(id) != null;
     }
 
     public double min_key(){
@@ -54,34 +55,33 @@ public class MinHeap {
         return keysIn[pos.get(id)];
     }
 
-    public void delete_min(){
-        //if heap is empty, return
-        if(n == 0){
+    public void delete_min() {
+        // If the heap is empty, return without doing anything.
+        if (n == 0) {
             return;
         }
-        int min = id[1];
-        id[1] = id[n];
-        keysIn[1] = keysIn[n];
-        if (pos.contains(min)) {
-            pos.remove(Integer.valueOf(min));
-        }
+        // Swap the first element with the last element.
+        swap(1, n);
+        // Remove the last element (the previous min) from the heap.
+        pos.set(id[n], null); // Set the position of the removed element to null.
         n--;
+        // Restore the heap property starting from the root.
         reHeapify(1);
-
-
     }
-    public void decrease_key(int id, int key) {
+
+    public void decrease_key(int id, double key) {
         int index = pos.get(id);
-        if(keysIn[index] <= key){
+        if (keysIn[index] <= key) {
             return;
         }
         keysIn[index] = key;
-        //(index)/2 is the parent of index
-        while(index > 1 && keysIn[index] < keysIn[(index)/2]){
-            swap(index,(index)/2);
-            index = (index)/2;
+        // Bubble up the element at index if its key is less than that of its parent's.
+        while (index > 1 && keysIn[index] < keysIn[index / 2]) {
+            swap(index, index / 2);
+            index = index / 2;
         }
     }
+
 
     private void build_heap(){
         for(int i = n/2; i >= 1; i--){
@@ -118,7 +118,7 @@ public class MinHeap {
 
     //print function
     public void printHeap(){
-        for(int i = 0; i < n; i++){
+        for(int i = 0; i <= n; i++){
             System.out.println(keysIn[i]);
         }
     }
