@@ -32,7 +32,7 @@ public class Main {
         System.out.println("Size of graph: " + n);
         Graph graph = new Graph(n); //create graph with size n
         System.out.println("Graph created...");
-        for (int i = 0; i < n; i++) {
+        while(sc.hasNext()){
             int src = sc.nextInt(); //source
             int dest = sc.nextInt(); //destination
             double weight = sc.nextDouble(); //weight
