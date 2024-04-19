@@ -16,8 +16,6 @@ public class Main {
         //• Vertex 1 can be considered as the root.
         //Test
 
-        //note about potential error
-        //the vertices in your graph.txt file start from 1, while in your Java code, array and list indices start from 0. This might cause off-by-one errors when you try to access the vertices in your adjacency list. You might need to adjust your code to account for this difference.
 
         //print starting message
         //System.out.println("Starting to read file...");
