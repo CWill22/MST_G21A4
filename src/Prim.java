@@ -73,7 +73,7 @@ public class Prim {
                 int v = edge.dest +1 ;
                 double weight = edge.weight;
                 //print u and v
-                System.out.println("u: " + (u) + " v: " + (v));
+                //System.out.println("u: " + (u) + " v: " + (v));
                 // If weight of (u, v) is smaller than D value of v
                 if (weight < D[v]) {
                     // Store u in edgeTo array

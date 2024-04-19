@@ -89,7 +89,7 @@ public class MinHeap {
             reHeapify(i);
         }
 
-        printHeap();
+        //printHeap();
     }
 
     private void reHeapify(int i){
