@@ -18,7 +18,7 @@ class Graph {
     public Graph(int vertices) {
         this.vertices = vertices;
         this.adjList = new ArrayList<>(vertices);
-        for (int i = 0; i < vertices; i++) {
+        for (int i = 0; i < vertices+1; i++) {
             adjList.add(new ArrayList<>());
         }
     }
