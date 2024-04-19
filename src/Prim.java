@@ -79,8 +79,8 @@ public class Prim {
                     D[v] = weight;
 
                     // Decrease key of v in the priority queue
-                    if (pq.in_heap(v + 1)) {
-                        pq.decrease_key(v + 1, (int) weight);
+                    if (pq.in_heap(v+1 )) {
+                        pq.decrease_key(v+1 , (int) weight);
                     }
                 }
             }

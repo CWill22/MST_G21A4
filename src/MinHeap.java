@@ -39,7 +39,7 @@ public class MinHeap {
     }
 
     public boolean in_heap(int id){
-        return pos.get(id) != null;
+        return (pos.get(id) != null);
     }
 
     public double min_key(){
@@ -84,7 +84,7 @@ public class MinHeap {
     }
 
     private void build_heap(){
-        for(int i = n/2; i >= 0; i--){
+        for(int i = n/2; i >= 1; i--){
             reHeapify(i);
         }
     }
