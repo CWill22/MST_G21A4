@@ -18,6 +18,7 @@ class Graph {
     public Graph(int vertices) {
         this.vertices = vertices;
         this.adjList = new ArrayList<>(vertices);
+        // Initialize the adjacency list.
         for (int i = 0; i < vertices+1; i++) {
             adjList.add(new ArrayList<>());
         }
@@ -42,10 +43,10 @@ public class Prim {
     public Prim(Graph graph) {
         this.graph = graph;
         int vertices = graph.vertices;
-        this.D = new double[vertices+1];
-        this.edgeTo = new Edge[vertices+1];
-        this.inMST = new boolean[vertices+1];
-        this.pq = new MinHeap(vertices);
+        this.D = new double[vertices+1];  // Store the D value of each vertex
+        this.edgeTo = new Edge[vertices+1]; // Store the edge of vertex v that gives the minimum weight to reach v from the MST
+        this.inMST = new boolean[vertices+1]; // To keep track of vertices already included in MST
+        this.pq = new MinHeap(vertices); // Priority queue to store vertices with minimum D value
     }
 
     public List<Edge> primsMST() {

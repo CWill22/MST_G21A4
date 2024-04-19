@@ -30,6 +30,8 @@ public class Main {
         //System.out.println("Size of graph: " + n);
         Graph graph = new Graph(n); //create graph with size n
         //System.out.println("Graph created...");
+
+            // read the rest of the file
         while(sc.hasNext()){
             int src = sc.nextInt() -1; //source
             int dest = sc.nextInt() -1; //destination
@@ -53,7 +55,7 @@ public class Main {
         System.out.println("Minimum Spanning Tree: ");
         for (Edge edge : mst) {
             if(edge != null){
-                System.out.println((edge.src + 1) + " - " + (edge.dest + 1)+ " : " + edge.weight);
+                System.out.println("edge:" + (edge.src + 1) + " <-> " + (edge.dest + 1)+ " weight: " + edge.weight);
             } else System.out.println("Edge is null...");
 
         }
@@ -98,9 +100,10 @@ public class Main {
     }
     }
 
+    // Function to print the graph
     private static void printGraph(int n, Graph graph) {
         for (int i = 0; i < n; i++) {
-            System.out.print((i+1) + " -> ");
+            System.out.print((i+1) + " <-> ");
             for (Edge edge : graph.adjList.get(i)) {
                 System.out.print((edge.dest + 1) + "-weight:" + edge.weight + " ");
             }

@@ -39,23 +39,28 @@ public class MinHeap {
         }
     }
 
+    //check if id is in heap
     public boolean in_heap(int id){
         // Check if the id is within the range of the pos list.
         return id > 0 && id < pos.size() && pos.get(id) != null;
     }
 
+    //minimum key
     public double min_key(){
         return keysIn[1];
     }
 
+    //minimum id
     public int min_id(){
         return id[1];
     }
 
+    //key of id
     public double key(int id){
         return keysIn[pos.get(id)];
     }
 
+    //delete min
     public void delete_min() {
         // If the heap is empty, return without doing anything.
         if (n == 0) {
@@ -70,8 +75,10 @@ public class MinHeap {
         reHeapify(1);
     }
 
+    //decrease key
     public void decrease_key(int id, double key) {
         int index = pos.get(id);
+        // If the key is greater than the current key, return without doing anything.
         if (keysIn[index] <= key) {
             return;
         }
@@ -93,20 +100,24 @@ public class MinHeap {
     }
 
     private void reHeapify(int i){
-        int l = 2*i;
-        int r = 2*i+1;
+        int l = 2*i; //left child
+        int r = 2*i+1; //right child
         int smallest = i;
+        //check if left child is smaller
         if(l <= n && keysIn[l] < keysIn[smallest]){
             smallest = l;
         }
+        //check if right child is smaller
         if(r <= n && keysIn[r] < keysIn[smallest]){
             smallest = r;
         }
+        //swap if smallest is not i
         if(smallest != i){
             swap(i,smallest);
             reHeapify(smallest);
         }
     }
+
 
     private void swap(int i, int j){
         double temp = keysIn[i];
