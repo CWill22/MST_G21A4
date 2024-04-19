@@ -26,7 +26,7 @@ class Graph {
     public void addEdge(int src, int dest, double weight) {
         Edge edge1 = new Edge(src, dest, weight);
         //Edge edge2 = new Edge(dest, src, weight); // Create a reverse edge for undirected graph
-        adjList.get(src+1).add(edge1);
+        adjList.get(src).add(edge1);
         //adjList.get(dest).add(edge2); // Add reverse edge to the adjacency list of destination vertex
     }
 
@@ -52,7 +52,7 @@ public class Prim {
 
         // Initialize the D values and priority queue
         Arrays.fill(D, Double.POSITIVE_INFINITY);
-        D[1] = 0;  // Make key of first vertex as 0
+        D[0] = 0;  // Make key of first vertex as 0
 
         //int[] DInt = Arrays.stream(D).mapToInt(i -> (int) i).toArray();
         pq.heap_ini(D, graph.vertices);
@@ -70,7 +70,7 @@ public class Prim {
 
             // For each adjacent vertex v of u
             for (Edge edge : graph.adjList.get(u)) {
-                int v = edge.dest + 1;
+                int v = edge.dest +1 ;
                 double weight = edge.weight;
                 //print u and v
                 System.out.println("u: " + (u) + " v: " + (v));
@@ -89,9 +89,16 @@ public class Prim {
                 }
             }
         }
-
+// Build the result list from the edgeTo array
+        List<Edge> result = new ArrayList<>();
+        for (Edge edge : edgeTo) {
+            if (edge != null) {
+                result.add(edge);
+            }
+        }
+        return result;
         // Build the result list from the edgeTo array
-        return new ArrayList<>(Arrays.asList(edgeTo).subList(1, graph.vertices));
+        //return new ArrayList<>(Arrays.asList(edgeTo).subList(1, graph.vertices));
     }
     public void printHeap(){
         pq.printHeap();

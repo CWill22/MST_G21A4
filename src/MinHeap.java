@@ -13,11 +13,12 @@ public class MinHeap {
     }
 
     //constructor
+
     public MinHeap(int n){
         keysIn = new double[n+1];
         id = new int[n+1];
         this.n=n;
-        pos = new ArrayList<>();
+        pos = new ArrayList<>(n+1);
     }
 
 
@@ -26,9 +27,9 @@ public class MinHeap {
         this.keysIn = new double[n+1];
         this.id = new int[n+1];
         this.n = n;
-        this.pos = new ArrayList<>();
+        this.pos = new ArrayList<>(n+1);
         for(int i = 0; i < n; i++){
-            this.keysIn[i+1] = keys[i];
+            this.keysIn[i+1] = keys[i+1];
             this.id[i+1] = i+1;
             this.pos.add(i+1);
         }
@@ -63,7 +64,7 @@ public class MinHeap {
         // Swap the first element with the last element.
         swap(1, n);
         // Remove the last element (the previous min) from the heap.
-        pos.set(id[n], null); // Set the position of the removed element to null.
+        pos.set(id[n]-1, null); // Set the position of the removed element to null.
         n--;
         // Restore the heap property starting from the root.
         reHeapify(1);
@@ -87,6 +88,8 @@ public class MinHeap {
         for(int i = n/2; i >= 1; i--){
             reHeapify(i);
         }
+
+        printHeap();
     }
 
     private void reHeapify(int i){
@@ -109,8 +112,8 @@ public class MinHeap {
         double temp = keysIn[i];
         keysIn[i] = keysIn[j];
         keysIn[j] = temp;
-        pos.add(id[i],j);
-        pos.add(id[j],i);
+        pos.set(id[i]-1,j);
+        pos.set(id[j]-1,i);
         int temp2 = id[i];
         id[i] = id[j];
         id[j] = temp2;
@@ -118,6 +121,7 @@ public class MinHeap {
 
     //print function
     public void printHeap(){
+        System.out.println("Printing heap inside minheap...");
         for(int i = 0; i <= n; i++){
             System.out.println(keysIn[i]);
         }
